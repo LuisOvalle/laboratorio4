@@ -6,10 +6,10 @@ const bodyparser = require('body-parser');
 app.use(bodyparser.json());
 
 var mysqlConnection = mysql.createConnection({
-    host:'peliculadb3.c30hugurymyv.us-east-1.rds.amazonaws.com',
-    user: 'sudosu',
-    password : 'laboratorio26',
-    database: 'peliculadb'
+    host:'lab4.cpqom2m5tam2.us-east-1.rds.amazonaws.com',
+    user: 'virt',
+    password : 'virtualizacion26',
+    database: 'PeliculaDB'
 });
 
 mysqlConnection.connect((err)=>{
@@ -25,7 +25,7 @@ app.listen(3000,()=>console.log('Express server is running at port no : 30000'))
 
 //GET peliculas
 app.get('/peliculas',(req,res)=>{
-    mysqlConnection.query('SELECT * FROM pelicula', (err, rows, fields)=>{
+    mysqlConnection.query('SELECT * FROM Peli', (err, rows, fields)=>{
         if(!err)
         res.send(rows);
         else
@@ -35,7 +35,7 @@ app.get('/peliculas',(req,res)=>{
 
 //GET pelicula
 app.get('/peliculas/:id',(req,res)=>{
-    mysqlConnection.query('SELECT * FROM pelicula WHERE id = ?',[req.params.id],(err, rows, fields)=>{
+    mysqlConnection.query('SELECT * FROM Peli WHERE idPeli = ?',[req.params.id],(err, rows, fields)=>{
         if(!err)
         res.send(rows);
         else
@@ -45,7 +45,7 @@ app.get('/peliculas/:id',(req,res)=>{
 
 //borrar pelicula
 app.delete('/peliculas/:id',(req,res)=>{
-    mysqlConnection.query('DELETE pelicula WHERE id = ?',[req.params.id],(err, rows, fields)=>{
+    mysqlConnection.query('DELETE Peli WHERE idPeli = ?',[req.params.id],(err, rows, fields)=>{
         if(!err)
         res.send('Pelicula borrada ');
         else
